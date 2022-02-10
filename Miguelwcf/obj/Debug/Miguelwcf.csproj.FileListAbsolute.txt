@@ -1,0 +1,11 @@
+C:\Users\lmcor\source\repos\Miguelwcf\Miguelwcf\bin\Miguelwcf.dll.config
+C:\Users\lmcor\source\repos\Miguelwcf\Miguelwcf\bin\Miguelwcf.dll
+C:\Users\lmcor\source\repos\Miguelwcf\Miguelwcf\bin\Miguelwcf.pdb
+C:\Users\lmcor\source\repos\Miguelwcf\Miguelwcf\bin\EntityFramework.dll
+C:\Users\lmcor\source\repos\Miguelwcf\Miguelwcf\bin\EntityFramework.SqlServer.dll
+C:\Users\lmcor\source\repos\Miguelwcf\Miguelwcf\bin\EntityFramework.xml
+C:\Users\lmcor\source\repos\Miguelwcf\Miguelwcf\bin\EntityFramework.SqlServer.xml
+C:\Users\lmcor\source\repos\Miguelwcf\Miguelwcf\obj\Debug\Miguelwcf.csproj.CoreCompileInputs.cache
+C:\Users\lmcor\source\repos\Miguelwcf\Miguelwcf\obj\Debug\Miguelwcf.csproj.CopyComplete
+C:\Users\lmcor\source\repos\Miguelwcf\Miguelwcf\obj\Debug\Miguelwcf.dll
+C:\Users\lmcor\source\repos\Miguelwcf\Miguelwcf\obj\Debug\Miguelwcf.pdb

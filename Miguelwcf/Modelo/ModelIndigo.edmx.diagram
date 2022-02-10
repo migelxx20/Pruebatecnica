@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="e868701bcb874b2fb21c90e3b06b1ee3" Name="Diagram1">
+        <EntityTypeShape EntityType="indigoModel.Almacen" Width="1.5" PointX="0.75" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="indigoModel.InventarioFisico" Width="1.5" PointX="3" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="indigoModel.Producto" Width="1.5" PointX="0.75" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="indigoModel.Proveedor" Width="1.5" PointX="3.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="indigoModel.RemisionEntrada" Width="1.5" PointX="6" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="indigoModel.RemisionEntradaDetalle" Width="1.5" PointX="8.25" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="indigoModel.sysdiagrams" Width="1.5" PointX="2.75" PointY="7.625" IsExpanded="true" />
+        <AssociationConnector Association="indigoModel.FK_Almacen_Inventario_Fisico" ManuallyRouted="false" />
+        <AssociationConnector Association="indigoModel.FK_RemisionEntrada_Almacen" ManuallyRouted="false" />
+        <AssociationConnector Association="indigoModel.FK_Producto_Inventario_Fisico" ManuallyRouted="false" />
+        <AssociationConnector Association="indigoModel.FK_RemisionEntrada_Proveedor" ManuallyRouted="false" />
+        <AssociationConnector Association="indigoModel.FK_RemisionEntradaDetalle_RemisionEntrada" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

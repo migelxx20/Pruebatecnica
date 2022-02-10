@@ -1,0 +1,171 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="indigoModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Almacen">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Codigo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="InventarioFisico" Relationship="Self.FK_Almacen_Inventario_Fisico" FromRole="Almacen" ToRole="InventarioFisico" />
+    <NavigationProperty Name="RemisionEntrada" Relationship="Self.FK_RemisionEntrada_Almacen" FromRole="Almacen" ToRole="RemisionEntrada" />
+  </EntityType>
+  <EntityType Name="InventarioFisico">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdProducto" Type="Int32" Nullable="false" />
+    <Property Name="IdAlmacen" Type="Int32" Nullable="false" />
+    <Property Name="Cantidad" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Almacen" Relationship="Self.FK_Almacen_Inventario_Fisico" FromRole="InventarioFisico" ToRole="Almacen" />
+    <NavigationProperty Name="Producto" Relationship="Self.FK_Producto_Inventario_Fisico" FromRole="InventarioFisico" ToRole="Producto" />
+  </EntityType>
+  <EntityType Name="Producto">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Codigo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Nombre" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="PrecioVenta" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="StockMinimo" Type="Int32" Nullable="false" />
+    <Property Name="StockMaximo" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="InventarioFisico" Relationship="Self.FK_Producto_Inventario_Fisico" FromRole="Producto" ToRole="InventarioFisico" />
+  </EntityType>
+  <EntityType Name="Proveedor">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Codigo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Nombre" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Direccion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Telefono" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="RemisionEntrada" Relationship="Self.FK_RemisionEntrada_Proveedor" FromRole="Proveedor" ToRole="RemisionEntrada" />
+  </EntityType>
+  <EntityType Name="RemisionEntrada">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Codigo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="FechaDcumento" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="IdProveedor" Type="Int32" Nullable="false" />
+    <Property Name="IdAlmacen" Type="Int32" Nullable="false" />
+    <Property Name="Estado" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Almacen" Relationship="Self.FK_RemisionEntrada_Almacen" FromRole="RemisionEntrada" ToRole="Almacen" />
+    <NavigationProperty Name="Proveedor" Relationship="Self.FK_RemisionEntrada_Proveedor" FromRole="RemisionEntrada" ToRole="Proveedor" />
+    <NavigationProperty Name="RemisionEntradaDetalle" Relationship="Self.FK_RemisionEntradaDetalle_RemisionEntrada" FromRole="RemisionEntrada" ToRole="RemisionEntradaDetalle" />
+  </EntityType>
+  <EntityType Name="RemisionEntradaDetalle">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdRemisionEntrada" Type="Int32" Nullable="false" />
+    <Property Name="IdProducto" Type="Int32" Nullable="false" />
+    <Property Name="Cantidad" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="RemisionEntrada" Relationship="Self.FK_RemisionEntradaDetalle_RemisionEntrada" FromRole="RemisionEntradaDetalle" ToRole="RemisionEntrada" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <Association Name="FK_Almacen_Inventario_Fisico">
+    <End Role="Almacen" Type="Self.Almacen" Multiplicity="1" />
+    <End Role="InventarioFisico" Type="Self.InventarioFisico" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Almacen">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="InventarioFisico">
+        <PropertyRef Name="IdAlmacen" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RemisionEntrada_Almacen">
+    <End Role="Almacen" Type="Self.Almacen" Multiplicity="1" />
+    <End Role="RemisionEntrada" Type="Self.RemisionEntrada" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Almacen">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="RemisionEntrada">
+        <PropertyRef Name="IdAlmacen" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Producto_Inventario_Fisico">
+    <End Role="Producto" Type="Self.Producto" Multiplicity="1" />
+    <End Role="InventarioFisico" Type="Self.InventarioFisico" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Producto">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="InventarioFisico">
+        <PropertyRef Name="IdProducto" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RemisionEntrada_Proveedor">
+    <End Role="Proveedor" Type="Self.Proveedor" Multiplicity="1" />
+    <End Role="RemisionEntrada" Type="Self.RemisionEntrada" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Proveedor">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="RemisionEntrada">
+        <PropertyRef Name="IdProveedor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RemisionEntradaDetalle_RemisionEntrada">
+    <End Role="RemisionEntrada" Type="Self.RemisionEntrada" Multiplicity="1" />
+    <End Role="RemisionEntradaDetalle" Type="Self.RemisionEntradaDetalle" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RemisionEntrada">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="RemisionEntradaDetalle">
+        <PropertyRef Name="IdRemisionEntrada" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="indigoEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Almacen" EntityType="Self.Almacen" />
+    <EntitySet Name="InventarioFisico" EntityType="Self.InventarioFisico" />
+    <EntitySet Name="Producto" EntityType="Self.Producto" />
+    <EntitySet Name="Proveedor" EntityType="Self.Proveedor" />
+    <EntitySet Name="RemisionEntrada" EntityType="Self.RemisionEntrada" />
+    <EntitySet Name="RemisionEntradaDetalle" EntityType="Self.RemisionEntradaDetalle" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+    <AssociationSet Name="FK_Almacen_Inventario_Fisico" Association="Self.FK_Almacen_Inventario_Fisico">
+      <End Role="Almacen" EntitySet="Almacen" />
+      <End Role="InventarioFisico" EntitySet="InventarioFisico" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RemisionEntrada_Almacen" Association="Self.FK_RemisionEntrada_Almacen">
+      <End Role="Almacen" EntitySet="Almacen" />
+      <End Role="RemisionEntrada" EntitySet="RemisionEntrada" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Producto_Inventario_Fisico" Association="Self.FK_Producto_Inventario_Fisico">
+      <End Role="Producto" EntitySet="Producto" />
+      <End Role="InventarioFisico" EntitySet="InventarioFisico" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RemisionEntrada_Proveedor" Association="Self.FK_RemisionEntrada_Proveedor">
+      <End Role="Proveedor" EntitySet="Proveedor" />
+      <End Role="RemisionEntrada" EntitySet="RemisionEntrada" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RemisionEntradaDetalle_RemisionEntrada" Association="Self.FK_RemisionEntradaDetalle_RemisionEntrada">
+      <End Role="RemisionEntrada" EntitySet="RemisionEntrada" />
+      <End Role="RemisionEntradaDetalle" EntitySet="RemisionEntradaDetalle" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
